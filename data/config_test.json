@@ -1,0 +1,8 @@
+{
+    "ip": "127.0.0.1",
+    "daemonHost": "127.0.0.1",
+    "daemonPort": "127.0.0.1",
+    "filename": "test",
+    "password": "123456789abcdef",
+    "X-API-KEY": "1111111111111111111111111111"
+}
