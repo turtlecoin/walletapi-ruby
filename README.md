@@ -28,3 +28,19 @@ JSON.parse(js).each do |key, value|
     puts value
 end
 ```
+
+### Get balance of certain addresses
+```ruby
+puts Wallet.new.balance_address("TRTLuxL46JJaJbTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtzUzedHASfDRYPxVbEiYQsXUtBmQRL18pDdK72F5i")
+```
+
+### Create new address
+```ruby
+puts Wallet.new.create_addresses
+```
+
+### Get status
+```ruby
+puts Wallet.new.status
+```
+Get the wallet sync status, peer count, and hashrate
