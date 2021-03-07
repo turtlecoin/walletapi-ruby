@@ -40,7 +40,6 @@ class HTTP < ReadConfig
         @key
     end
     def post(meth, j = nil)
-        p "#{j.to_json}"
         l = Excon.post(File.join(ip,meth), :headers => { 'accept'       => "application/json", 'X-API-KEY'    => key}, :body => j.to_json).body
     end
     def get(meth)
@@ -120,6 +119,7 @@ class Wallet < HTTP
     end
     def set_node(port, ip)
         # Sets the node address & port
+        # public nodes list can be found @ https://explorer.turtlecoin.lol/nodes.html
         put('/node', port, ip)
     end
     def status
@@ -171,7 +171,7 @@ end
 
 
 #
-#Wallet.new.addresses_import("5c703d9bde0b7cd5ff3e19ea826a44066534661a7322c85e854e73f06e49cd06")
+puts Wallet.new.keys
 
 #Wallet.new.keys_mnemonic("TRTLuxL46JJa4bTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdK72F5i")
 

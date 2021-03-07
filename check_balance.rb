@@ -2,7 +2,6 @@ require_relative 'lib'
 require 'json'
 w = Wallet.new.balance
 j = JSON.parse(w)
-j["unlocked"] = 100
 if j["unlocked"].to_i > 0
     puts "TRTL: #{j["unlocked"]}"
 end
