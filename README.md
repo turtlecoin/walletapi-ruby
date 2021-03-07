@@ -22,6 +22,7 @@ The code above could be used to set a node for the wallet.
 
 ### Listing wallet addresses
 ```ruby
+require 'json'
 w  = Wallet.new
 js = w.list_addresses
 JSON.parse(js).each do |key, value|
@@ -44,3 +45,15 @@ puts Wallet.new.create_addresses
 puts Wallet.new.status
 ```
 Get the wallet sync status, peer count, and hashrate
+
+
+### transactions unconfirmed
+```ruby
+puts Wallet.new.transactions_unconfirmed
+```
+
+
+### Transactions
+```ruby
+puts Wallet.new.transactions
+```

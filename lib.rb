@@ -167,27 +167,13 @@ class Wallet < HTTP
 end
 
 
-#puts Wallet.new.balance_address("TRTLuxL46JJa4bTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdK72F5i")
-=begin
-w  = Wallet.new
-js = w.list_addresses
-JSON.parse(js).each do |key, value|
-    puts value
-end
-=end
-#puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
-#puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
 
-#puts Wallet.new.set_node("11898",  "TRTLnode.ddns.net")
-#puts Wallet.new.create_addresses
-#puts Wallet.new.status
+
+
+#
 #Wallet.new.addresses_import("5c703d9bde0b7cd5ff3e19ea826a44066534661a7322c85e854e73f06e49cd06")
-#Wallet.new.open_wallet
-#ReadConfig.new.get_address
+
 #Wallet.new.keys_mnemonic("TRTLuxL46JJa4bTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdK72F5i")
-#puts Wallet.new.transactions_unconfirmed
-#t = Wallet.new
-#puts t.create_addresses
 
 #t.wallet_import_view("9b40ced5414a943cb06427c83730d4a3c38d98cceff4dc1a16c631f0697c141a", 300000)
 
