@@ -168,7 +168,11 @@ end
 
 
 #puts Wallet.new.balance_address("TRTLuxL46JJa4bTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdK72F5i")
-puts Wallet.new.list_addresses
+w  = Wallet.new
+js = w.list_addresses
+JSON.parse(js).each do |key, value|
+    puts value
+end
 #puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
 #puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
 
