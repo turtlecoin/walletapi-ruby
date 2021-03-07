@@ -14,9 +14,9 @@ class ReadConfig
 end
 class HTTP < ReadConfig
     def initialize
-        @ip    = ReadConfig.new.config["ip"]
-        @dHost = ReadConfig.new.config["daemonHost"]
+        @ip    = ReadConfig.new.config["ip"] + ":" + ReadConfig.new.config["daemonPort"]
         @dPort = ReadConfig.new.config["daemonPort"]
+        @dHost = ReadConfig.new.config["daemonHost"]
         @fn    = ReadConfig.new.config["filename"]
         @pass  = ReadConfig.new.config["password"]
         @key   = ReadConfig.new.config["X-API-KEY"]
@@ -40,18 +40,19 @@ class HTTP < ReadConfig
         @key
     end
     def post(meth, j = nil)
-        l = Excon.post(File.join(ip,meth), :debug_request => true, :debug_response => true, :body => j,  :headers => {
-            'accept'       => "application/json",
-            'X-API-KEY'    => key
-        }).body
+        p "#{j.to_json}"
+        l = Excon.post(File.join(ip,meth), :headers => { 'accept'       => "application/json", 'X-API-KEY'    => key}, :body => j.to_json).body
     end
     def get(meth)
         l = Excon.get(File.join(ip, meth), :headers => {'accept'       => "application/json",  'X-API-KEY'    => key, 'X=Content-Type' => 'application/json'}).body
-    JSON.parse(l)
+    l
     end
-    def put(meth, new_port, new_ip)
-        l = Excon.put(File.join(ip, meth), :body => "daemonHost=#{new_ip}&daemonPort=#{new_port}&password=#{pass}", :headers => {'accept'       => "application/json",  'X-API-KEY'    => key,}).body
-    JSON.parse(l)
+    def put(meth, new_port, new_ip)   
+        j = {'daemonHost': "#{new_ip}",'daemonPort': new_port.to_i}.to_json
+        l = Excon.put(File.join(ip, meth),  :headers => {'accept' => "application/json", 'X=Content-Type' => 'application/json', 'X-API-KEY'    => key}, :body => j ).body
+    end
+    def delete(meth)
+        l = Excon.delete(File.join(ip, meth), :headers => { "accept" => "application/json", 'X-API-KEY' => key}).body
     end
 end
 class Helper < HTTP
@@ -65,10 +66,20 @@ class Helper < HTTP
 end
 class Wallet < HTTP
     H = Helper.new
-    def open_wallet 
-        post("/wallet/open")
+    def open_wallet(filename, password)
+        post('/wallet/open', {"daemonHost": dhost, "daemonPort": dport.to_i, "filename": filename, "password": password})
+    end
+    def wallet_close
+        # closes the wallet
+        delete("wallet")
+    end
+    def create_wallet(filename, password)
+        # create new wallet.
+        # Needs filename & password for file
+        post('/wallet/create', { "daemonHost": dhost, "daemonPort": dport.to_i, "filename": filename, "password": password})
     end
     def create_addresses
+        # CREATES A NEW ADDRESS
         post('/addresses/create')
     end
     def list_addresses
@@ -155,13 +166,20 @@ class Wallet < HTTP
 
 end
 
-#Wallet.new.set_node
-#Wallet.new.list_addresses
+
+#puts Wallet.new.balance_address("TRTLuxL46JJa4bTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdK72F5i")
+puts Wallet.new.list_addresses
+#puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
+#puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
+#puts Wallet.new.open_wallet("wallet.wallet", "derby3333")
+#puts Wallet.new.set_node("11898",  "TRTLnode.ddns.net")
+#puts Wallet.new.create_addresses
+#puts Wallet.new.status
 #Wallet.new.addresses_import("5c703d9bde0b7cd5ff3e19ea826a44066534661a7322c85e854e73f06e49cd06")
 #Wallet.new.open_wallet
 #ReadConfig.new.get_address
 #Wallet.new.keys_mnemonic("TRTLuxL46JJa4bTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdK72F5i")
-#Wallet.new.balance("TRTLv2TUfhPjk4ZGfCG65QKFkkabStMKY4esTV8iKfdrZza11nt8D659KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdMacALV")
+#puts Wallet.new.transactions_unconfirmed
 #t = Wallet.new
 #puts t.create_addresses
 
