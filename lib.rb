@@ -171,7 +171,7 @@ end
 puts Wallet.new.list_addresses
 #puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
 #puts Wallet.new.create_wallet("fuckthegovt.wallet", "fuckthegovt")
-#puts Wallet.new.open_wallet("wallet.wallet", "derby3333")
+
 #puts Wallet.new.set_node("11898",  "TRTLnode.ddns.net")
 #puts Wallet.new.create_addresses
 #puts Wallet.new.status
