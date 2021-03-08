@@ -131,7 +131,7 @@ class Wallet < HTTP
     def keys_address(addr)
         # Gets the public & private spend key for a given address.
         # Note: it cant be used with a view only wallet
-        get("/keys/#{addr}")
+        JSON.parse(get("/keys/#{addr}"))
     end
     def keys
         # Gets the wallet containers shared private view key
