@@ -118,7 +118,7 @@ class Wallet < HTTP
     end
     def address_primary
         # gets the primary address
-        get('/addresses/primary')
+        JSON.parse(get('/addresses/primary'))
     end
     def set_node(port, ip)
         # Sets the node address & port
@@ -171,12 +171,12 @@ end
 
 
 
-puts Wallet.new.create_integrated_address("TRTLv34MvP3e2jUAZZiQFqG9rNVbZUoTRPdhbXNWymshWaXEsey71RtH3VnVyWnELAfQJCfBHVebk2L98j6QqaVbLXrG1xz1QM1", "6e4a87989095449ac08176f4b4e6a5efbff47d2272a8fb652fc6e64217a69768")
+#puts Wallet.new.create_integrated_address("TRTLuyoGbX6YuuMus1jFkJcQAHrZ5mB5HLUdTTgB1xLc6Ytqr5Ssse5hUFLU48TrkpLfZEKgDomKCRNmxoqFpRWj5Wm3bD9ruTa", "6e4a87989095449ac08176f4b4e6a5efbff47d2272a8fb652fc6e64217a69768")
 #
 #puts Wallet.new.wallet_close
 
 #puts Wallet.new.set_node(11898, "TRTLnode.ddns.net")
 #puts Wallet.new.address_primary
 #puts Wallet.new.keys
-#t.wallet_import_view("9b40ced5414a943cb06427c83730d4a3c38d98cceff4dc1a16c631f0697c141a", 300000)
+
 
