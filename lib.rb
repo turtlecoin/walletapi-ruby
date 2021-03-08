@@ -140,7 +140,7 @@ class Wallet < HTTP
     def keys_mnemonic(addr)
         # Gets the mnemonic seed for the given address. 
         # NOTE: can't be used with only a view only wallet.
-        get("/keys/mnemonic/#{addr}")
+        JSON.parse(get("/keys/mnemonic/#{addr}"))
     end
 
     def wallet_import_view(private_view_key, addr, scan_height = 300000)
@@ -175,7 +175,7 @@ end
 #
 #puts Wallet.new.wallet_close
 
-#puts Wallet.new.set_node(11898, "TRTLnode.ddns.net")
+#
 #puts Wallet.new.address_primary
 #puts Wallet.new.keys
 
