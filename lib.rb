@@ -85,6 +85,9 @@ class Wallet < HTTP
         # Gets a list of all the addresses in the wallet container
         get('/addresses')
     end
+    def create_integrated_address(address, payment_id)
+        get('/addresses/' + address + "/" + payment_id)
+    end
     def wallet_addresses_import_view(public_spend_key, scan_height = 300000)
         # Imports a view only subwallet with the given publicSpendKey
         post('/addresses/import/view', { "scanHeight": scan_height, "publicSpendKey": public_spend_key })
@@ -161,19 +164,19 @@ class Wallet < HTTP
     end
     def transactions
         # Gets a list of all transactions in the wallet container
-        get('/transactions')
+        JSON.parse(get('/transactions'))["transactions"].shift
     end
 
 end
 
 
 
-
-
+puts Wallet.new.create_integrated_address("TRTLv34MvP3e2jUAZZiQFqG9rNVbZUoTRPdhbXNWymshWaXEsey71RtH3VnVyWnELAfQJCfBHVebk2L98j6QqaVbLXrG1xz1QM1", "6e4a87989095449ac08176f4b4e6a5efbff47d2272a8fb652fc6e64217a69768")
 #
-puts Wallet.new.keys
+#puts Wallet.new.wallet_close
 
-#Wallet.new.keys_mnemonic("TRTLuxL46JJa4bTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtDUzedHASfDRYPxVbEpYQsXUtBmQRL18pDdK72F5i")
-
+#puts Wallet.new.set_node(11898, "TRTLnode.ddns.net")
+#puts Wallet.new.address_primary
+#puts Wallet.new.keys
 #t.wallet_import_view("9b40ced5414a943cb06427c83730d4a3c38d98cceff4dc1a16c631f0697c141a", 300000)
 
