@@ -1,4 +1,5 @@
 require_relative 'lib'
+require 'securerandom'
 require 'json'
 module TurtleCoin
     @w = Wallet.new
@@ -20,9 +21,25 @@ module TurtleCoin
         # list all addresses
         JSON.parse(@w.list_addresses)
     end
+    def self.create_integrated(addr, hex=nil)
+        if hex.nil?
+            # this will create an random 64 char hex string
+            hex = SecureRandom.hex(32)
+        end
+        puts "HEX: " + hex
+        @w.create_integrated_address(addr, hex)
+    end
+    def self.transactions
+        @w.transactions
+    end
 end
 
-puts TurtleCoin.create_addresses
+trans = TurtleCoin.transactions.to_h
+trans.each do |keys, value|
+    puts keys.to_s + ": " + value.to_s
+end
+puts "\n\n"
+#puts TurtleCoin.create_integrated("TRTLuyoGbX6YuuMus1jFkJcQAHrZ5mB5HLUdTTgB1xLc6Ytqr5Ssse5hUFLU48TrkpLfZEKgDomKCRNmxoqFpRWj5Wm3bD9ruTa")
 #puts TurtleCoin.get_balance
 #puts TurtleCoin.all_addresses
-puts TurtleCoin.address_count
+#puts TurtleCoin.address_count

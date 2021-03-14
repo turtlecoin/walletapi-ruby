@@ -149,8 +149,7 @@ class Wallet < HTTP
         post('/wallet/import/view',  j )
     end
     def export_json(filename)
-        j = { "filename" => filename }
-        post('/export/json', j.to_json )
+        post('/export/json', { 'filename': filename } )
     end
     def transactions_unconfirmed_addr(addr)
         # Gets a list of all unconfirmed, outgoing transactions in the wallet container
@@ -171,8 +170,7 @@ end
 
 
 
-#puts Wallet.new.create_integrated_address("TRTLuyoGbX6YuuMus1jFkJcQAHrZ5mB5HLUdTTgB1xLc6Ytqr5Ssse5hUFLU48TrkpLfZEKgDomKCRNmxoqFpRWj5Wm3bD9ruTa", "6e4a87989095449ac08176f4b4e6a5efbff47d2272a8fb652fc6e64217a69768")
-#
+
 #puts Wallet.new.wallet_close
 
 #
