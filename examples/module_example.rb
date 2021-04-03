@@ -1,4 +1,4 @@
-require_relative '../lib'
+require_relative 'lib/TurtleCoin'
 require 'securerandom'
 require 'json'
 module TurtleCoin
