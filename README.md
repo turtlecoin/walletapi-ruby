@@ -1,25 +1,27 @@
 # TurtleCoin
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/TurtleCoin`. To experiment with that code, run `bin/console` for an interactive prompt.
+### what is needed to get started?
+Download and install <a href="https://github.com/turtlecoin/turtlecoin">https://github.com/turtlecoin/turtlecoin</a>
 
-TODO: Delete this and the text above, and describe your gem
+More info: <a href="https://turtlecoin.github.io/wallet-api-docs/">https://turtlecoin.github.io/wallet-api-docs/</a>
+
+### Config
+The config file is located in the `data` directory. 
+```
+{
+    "ip": "http://",
+    "daemonHost": "127.0.0.1",
+    "daemonPort": "8070",
+    "filename": "wallet.wallet",
+    "password": "",
+    "X-API-KEY": ""
+}
+
+
+```
 ### Install the needed Gems
 ```gem install excon```
-## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'TurtleCoin'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install TurtleCoin
 
 ## Examples
 

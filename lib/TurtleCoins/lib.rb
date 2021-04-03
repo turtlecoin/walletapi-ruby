@@ -3,7 +3,7 @@ require 'json'
 class ReadConfig
     def initialize(config = nil)
         if config.nil?
-            config = File.join("../", "data", "config.json")
+            config = File.join("data", "config.json")
         end
         @config = config
     end
