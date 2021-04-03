@@ -1,59 +1,40 @@
-# TurtleWalletRPC
+# TurtleCoin
 
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/TurtleCoin`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-### Creating new wallet
+TODO: Delete this and the text above, and describe your gem
+
+## Installation
+
+Add this line to your application's Gemfile:
+
 ```ruby
-puts Wallet.new.create_wallet("new_wallet.wallet", "dogs_cant_look_up")
+gem 'TurtleCoin'
 ```
 
-This will create a new wallet. Make sure that any opened wallets are closed.
+And then execute:
 
-### Closing wallet
-```ruby
-puts Wallet.new.wallet_close
-```
-This will close the wallet so a new one could be opened.
+    $ bundle install
 
-### Setting node
-```ruby
-puts Wallet.new.set_node("11898",  "TRTLnode.ddns.net")
-```
-The code above could be used to set a node for the wallet.
+Or install it yourself as:
 
-### Listing wallet addresses
-```ruby
-require 'json'
-w  = Wallet.new
-js = w.list_addresses
-JSON.parse(js).each do |key, value|
-    puts value
-end
-```
+    $ gem install TurtleCoin
 
-### Get balance of certain addresses
-```ruby
-puts Wallet.new.balance_address("TRTLuxL46JJaJbTYMyQGLi4euHoe3QUNQQ5niiPoYah15pc6ESFdZJ59KmtzUzedHASfDRYPxVbEiYQsXUtBmQRL18pDdK72F5i")
-```
+## Usage
 
-### Create new address
-```ruby
-puts Wallet.new.create_addresses
-```
+TODO: Write usage instructions here
 
-### Get status
-```ruby
-puts Wallet.new.status
-```
-Get the wallet sync status, peer count, and hashrate
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/TurtleCoin.
 
 
-### transactions unconfirmed
-```ruby
-puts Wallet.new.transactions_unconfirmed
-```
+## License
 
-
-### Transactions
-```ruby
-puts Wallet.new.transactions
-```
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

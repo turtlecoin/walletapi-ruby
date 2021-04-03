@@ -1,4 +1,4 @@
-require_relative 'lib/TurtleCoin'
+require '../lib/TurtleCoin'
 require 'json'
 w = Wallet.new.balance
 j = JSON.parse(w)

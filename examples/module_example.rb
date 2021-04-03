@@ -1,4 +1,4 @@
-require_relative 'lib'
+require_relative '../lib'
 require 'securerandom'
 require 'json'
 module TurtleCoin
@@ -39,7 +39,4 @@ trans.each do |keys, value|
     puts keys.to_s + ": " + value.to_s
 end
 puts "\n\n"
-#puts TurtleCoin.create_integrated("TRTLuyoGbX6YuuMus1jFkJcQAHrZ5mB5HLUdTTgB1xLc6Ytqr5Ssse5hUFLU48TrkpLfZEKgDomKCRNmxoqFpRWj5Wm3bD9ruTa")
-#puts TurtleCoin.get_balance
-#puts TurtleCoin.all_addresses
-#puts TurtleCoin.address_count
+
