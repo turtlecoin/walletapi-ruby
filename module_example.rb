@@ -10,6 +10,9 @@ module TurtleCoin
         end
         nil
     end
+    def self.get_balances
+        JSON.parse(w.balances).each {|key, value| puts "Address: #{key["address"]}\nUnlocked: #{key["unlocked"]}\nLocked: #{key["locked"]}\n\n"}
+    end
     def self.get_balance
         @w.balance
     end
@@ -33,10 +36,11 @@ module TurtleCoin
         @w.transactions
     end
 end
-
+=begin
 trans = TurtleCoin.transactions.to_h
 trans.each do |keys, value|
     puts keys.to_s + ": " + value.to_s
 end
 puts "\n\n"
+=end
 

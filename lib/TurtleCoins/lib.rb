@@ -40,7 +40,7 @@ class HTTP < ReadConfig
         @key
     end
     def post(meth, j = nil)
-        l = Excon.post(File.join(ip,meth), :headers => { 'accept'       => "application/json", 'X-API-KEY'    => key}, :body => j.to_json).body
+        l = Excon.post(File.join(ip,meth), :headers => { 'accept'  => "application/json", 'X-API-KEY'    => key, "Content-Type" => "application/json"}, :body => j.to_json).body
     end
     def get(meth)
         l = Excon.get(File.join(ip, meth), :headers => {'accept'       => "application/json",  'X-API-KEY'    => key, 'X=Content-Type' => 'application/json'}).body
@@ -51,7 +51,7 @@ class HTTP < ReadConfig
         l = Excon.put(File.join(ip, meth),  :headers => {'accept' => "application/json", 'X=Content-Type' => 'application/json', 'X-API-KEY'    => key}, :body => j ).body
     end
     def delete(meth)
-        l = Excon.delete(File.join(ip, meth), :headers => { "accept" => "application/json", 'X-API-KEY' => key}).body
+        l = Excon.delete(File.join(ip, meth), :headers => { "accept" => "application/json", 'X-API-KEY'    => key}).body
     end
 end
 class Helper < HTTP
@@ -70,7 +70,7 @@ class Wallet < HTTP
     end
     def wallet_close
         # closes the wallet
-        delete("wallet")
+        delete("/wallet")
     end
     def create_wallet(filename, password)
         # create new wallet.
@@ -88,14 +88,23 @@ class Wallet < HTTP
     def create_integrated_address(address, payment_id)
         get('/addresses/' + address + "/" + payment_id)
     end
-    def wallet_addresses_import_view(public_spend_key, scan_height = 300000)
+    def import_seed(mnemonic_seed, scan_height = 3472695)
+        j = H.json({"daemonHost": dhost, "daemonPort": dport.to_i, "filename": filename, "password": pass, "scanHeight": scan_height, "mnemonicSeed": mnemonic_seed})
+        post('/wallet/import/seed')
+    end
+    def wallet_import_view(private_view_key, addr, scan_height = 3472695)
+        # Imports a view only wallet with a private view key and public address. 
+        j = H.json({"daemonHost": dhost, "daemonPort": dport.to_i, "filename": filename, "password": pass, "scanHeight": scan_height, "privateViewKey": private_view_key, "address": addr})
+        post('/wallet/import/view',  j )
+    end
+    def wallet_addresses_import_view(public_spend_key, scan_height = 3472695)
         # Imports a view only subwallet with the given publicSpendKey
         post('/addresses/import/view', { "scanHeight": scan_height, "publicSpendKey": public_spend_key })
     end
-    def wallet_addresses_import(private_spend_key, scan_height = 300000)
+    def wallet_addresses_import(private_spend_key, scan_height = 3472695)
         # Imports a subwallet with the given private spend key
-        # scan_height is set as '300000' by default.
-        post('addresses/import', { "scanHeight": scan_height, "privateSpendKey": "#{private_spend_key}"}.to_json)
+        # scan_height is set as '3472695' by default.
+        post('addresses/import', { "scanHeight": scan_height, "privateSpendKey": private_spend_key})
     end
     def node
         # Get the nodes address, port, fee and fee address
@@ -143,11 +152,7 @@ class Wallet < HTTP
         JSON.parse(get("/keys/mnemonic/#{addr}"))
     end
 
-    def wallet_import_view(private_view_key, addr, scan_height = 300000)
-        j = H.json({ "scanHeight": scan_height, "privateViewKey": private_view_key, "address": addr})
-        # Imports a view only wallet with a private view key and public address. 
-        post('/wallet/import/view',  j )
-    end
+
     def export_json(filename)
         post('/export/json', { 'filename': filename } )
     end
@@ -165,16 +170,11 @@ class Wallet < HTTP
         # Gets a list of all transactions in the wallet container
         JSON.parse(get('/transactions'))["transactions"].shift
     end
-
+    def transcation_send_basic(addr, amount)
+        j = { "destination" => addr, "amount" => amount }
+        post('/transaction/send/basic', j.to_json)
+    end
 end
 
-
-
-
-#puts Wallet.new.wallet_close
-
-#
-#puts Wallet.new.address_primary
-#puts Wallet.new.keys
 
 
