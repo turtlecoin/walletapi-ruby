@@ -168,7 +168,7 @@ class Wallet < HTTP
     end
     def transactions
         # Gets a list of all transactions in the wallet container
-        JSON.parse(get('/transactions'))["transactions"].shift
+        JSON.parse(get('/transactions'))
     end
     def transcation_send_basic(addr, amount)
         j = { "destination" => addr, "amount" => amount }

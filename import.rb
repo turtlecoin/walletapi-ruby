@@ -13,4 +13,4 @@ puts "\n\n\n"
 w = Wallet.new
 JSON.parse(w.keys).each { |key, value| puts "#{key}: #{value}"}
 
-JSON.parse(w.balances).each {|key, value| puts "Address: #{key["address"]}\nUnlocked: #{key["unlocked"]}\nLocked: #{key["locked"]}\n\n"}
+
