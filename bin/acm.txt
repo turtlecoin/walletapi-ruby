@@ -1,0 +1,7 @@
+[1] gpotter2. 2021. Adding new protocols (Feb 2021). Retrieved April 16, 2021 from https://scapy.readthedocs.io/en/latest/build_dissect.html
+
+
+
+[2] david_ross, sebastien-bartoli. 2021. Adding new protocols (Mar 2021). Retrieved April 17, 2021 from https://developer.mozilla.org/en-US/docs/Glossary/TTL
+
+[2] david_ross, sebastien-bartoli. 2021. TTL (Mar 2021). Retrieved April 17, 2021 from https://developer.mozilla.org/en-US/docs/Glossary/TTL
